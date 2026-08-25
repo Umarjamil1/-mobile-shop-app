@@ -8,9 +8,12 @@ namespace TechApi.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private const string ConnectionString =
-            "Server=DESKTOP-JMDLINI\\SQLEXPRESS01;Database=TechApi;Trusted_Connection=True;MultipleActiveResultSets=True;";
+        private readonly string ConnectionString;
 
+        public CustomerController(IConfiguration configuration)
+        {
+            ConnectionString = configuration.GetConnectionString("DefaultConnection")!;
+        }
         [HttpPost]
         public ActionResult SaveCustomerDetails(CustomerRequestDto customerRequestDto)
         {
