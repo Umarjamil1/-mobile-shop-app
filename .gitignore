@@ -11,3 +11,4 @@ Backend/**/obj/
 .vs/
 .vscode/
 *.user
+Backend/**/appsettings.json
