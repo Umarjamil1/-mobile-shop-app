@@ -1,0 +1,62 @@
+<div class="container py-4" style="margin-top: 70px;">
+
+  <!-- Heading -->
+  <h1 class="mb-2">Inventory</h1>
+
+  <!-- Form -->
+  <form (ngSubmit)="onsubmit()" #inventoryForm="ngForm">
+    <div class="row g-3 mb-3">
+      <div class="col-md-3">
+        <label class="form-label">Product Id</label>
+        <input type="number" class="form-control" placeholder="productId" [disabled]="isupdate"
+               name="productId" [(ngModel)]="inventoryData.ProductID">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Product Name</label>
+        <input type="text" class="form-control" placeholder="Product Name"
+               name="productName" [(ngModel)]="inventoryData.Productname">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Stock Availble</label>
+        <input type="number" class="form-control" placeholder="Stock Availble"
+               name="availableStock" [(ngModel)]="inventoryData.Avaliblestock">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Reorder Stock</label>
+        <input type="number" class="form-control" placeholder="Reorder Stock"
+               name="reorderStock" [(ngModel)]="inventoryData.Reorderstock">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mb-4">Submit</button>
+  </form>
+
+  <!-- Table -->
+  <h2 class="mb-3">Inventory Details</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Stock Availble</th>
+        <th>Reorder Stock</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inventory of inventoryList; let i = index">
+        <th scope="row">{{ inventory.productID }}</th>
+        <td>{{ inventory.productname }}</td>
+        <td>{{ inventory.avaliblestock }}</td>
+        <td>{{ inventory.reorderstock }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" (click)="onEdit(inventory)">Edit</button>&nbsp;
+          <button class="btn btn-danger btn-sm" (click)="onDeleteInventory(inventory.productID)">Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="inventoryList.length === 0">
+        <td colspan="5" class="text-center text-muted">No inventory records found.</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
