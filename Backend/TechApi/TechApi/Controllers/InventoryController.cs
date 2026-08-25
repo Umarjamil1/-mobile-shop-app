@@ -8,8 +8,12 @@ namespace TechApi.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        private const string ConnectionString =
-            "Server=DESKTOP-JMDLINI\\SQLEXPRESS01;Database=TechApi;Trusted_Connection=True;MultipleActiveResultSets=True;";
+        private readonly string ConnectionString;
+
+        public InventoryController(IConfiguration configuration)
+        {
+            ConnectionString = configuration.GetConnectionString("DefaultConnection")!;
+        }
 
         [HttpPost]
         public ActionResult SaveInventoryData(Inventory InventoryDto)
